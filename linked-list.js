@@ -71,8 +71,28 @@ class LinkedList {
     } while (item.next !== null);
     return null;
   }
+  insertAt(value, index) {
+    let item = this.head;
+    const insert = this.Node(value);
+    for (let i = 0; i < index - 1; i++) {
+      item = item.next;
+    }
+    insert.next = item.next;
+    insert.previous = item;
+    item.next = insert;
+    insert.next.previous = insert;
+  }
+  removeAt(index) {
+    let item = this.head;
+    for (let i = 0; i < index - 1; i++) {
+      item = item.next;
+    }
+    item.next = item.next.next;
+  }
 }
 
-const list = new LinkedList(["first", "second", "third"]);
+const list = new LinkedList(["first", "third", "fourth"]);
 
+list.insertAt("second", 1);
+list.removeAt(2);
 console.log(list.toString());
