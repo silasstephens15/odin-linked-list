@@ -27,10 +27,52 @@ class LinkedList {
     item.previous = null;
     this.head = item;
   }
+  at(index) {
+    let item = this.head;
+    for (let i = 0; i < index; i++) {
+      item = item.next;
+    }
+    return item;
+  }
+  pop() {
+    this.tail = this.tail.previous;
+    this.tail.next = null;
+  }
+  toString() {
+    let item = this.head;
+    let string = "";
+    while (item.next !== null) {
+      string += `(${item.value})->`;
+      item = item.next;
+    }
+    string += `(${item.value})`;
+    return string;
+  }
+  contains(value) {
+    let item = this.head;
+    do {
+      if (item.value === value) {
+        return true;
+      }
+      item = item.next;
+    } while (item.next !== null);
+    return false;
+  }
+  find(value) {
+    let item = this.head;
+    let i = 0;
+    do {
+      item = item.next;
+      i++;
+      if (item.value === value) {
+        return i;
+      } else {
+      }
+    } while (item.next !== null);
+    return null;
+  }
 }
 
 const list = new LinkedList(["first", "second", "third"]);
 
-list.append("appended");
-list.prepend("prepended");
-console.log(list.head);
+console.log(list.toString());
